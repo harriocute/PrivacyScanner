@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary brand -->
+    <color name="primary">#1565C0</color>
+    <color name="primary_dark">#0D47A1</color>
+    <color name="primary_light">#1E88E5</color>
+    <color name="primary_alpha">#201565C0</color>
+    <color name="on_primary">#FFFFFF</color>
+
+    <!-- Risk colors -->
+    <color name="risk_safe">#4CAF50</color>
+    <color name="risk_low">#8BC34A</color>
+    <color name="risk_moderate">#FF9800</color>
+    <color name="risk_high">#F44336</color>
+    <color name="risk_critical">#B71C1C</color>
+
+    <!-- Risk surface/background tints (10% opacity) -->
+    <color name="risk_safe_surface">#1A4CAF50</color>
+    <color name="risk_moderate_surface">#1AFF9800</color>
+    <color name="risk_high_surface">#1AF44336</color>
+
+    <!-- Neutral surfaces -->
+    <color name="surface">#FAFAFA</color>
+    <color name="surface_variant">#F0F0F0</color>
+    <color name="surface_dark">#121212</color>
+    <color name="surface_variant_dark">#1E1E1E</color>
+    <color name="on_surface">#1C1B1F</color>
+    <color name="on_surface_dark">#E6E1E5</color>
+    <color name="on_surface_variant">#49454F</color>
+
+    <!-- Gradient header -->
+    <color name="gradient_start">#1565C0</color>
+    <color name="gradient_end">#0D47A1</color>
+
+    <!-- Warning / danger -->
+    <color name="warning_orange">#FF9800</color>
+    <color name="danger_red">#F44336</color>
+    <color name="safe_green">#4CAF50</color>
+
+    <!-- White/black -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+</resources>
+
+<!-- Additional colors referenced in layouts -->

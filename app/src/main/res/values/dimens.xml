@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing -->
+    <dimen name="spacing_xs">4dp</dimen>
+    <dimen name="spacing_sm">8dp</dimen>
+    <dimen name="spacing_md">16dp</dimen>
+    <dimen name="spacing_lg">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+
+    <!-- Card corners -->
+    <dimen name="card_corner_sm">8dp</dimen>
+    <dimen name="card_corner_md">16dp</dimen>
+    <dimen name="card_corner_lg">20dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="text_xs">10sp</dimen>
+    <dimen name="text_sm">12sp</dimen>
+    <dimen name="text_md">14sp</dimen>
+    <dimen name="text_lg">16sp</dimen>
+    <dimen name="text_xl">20sp</dimen>
+    <dimen name="text_xxl">28sp</dimen>
+    <dimen name="text_display">44sp</dimen>
+
+    <!-- Icon sizes -->
+    <dimen name="icon_sm">16dp</dimen>
+    <dimen name="icon_md">24dp</dimen>
+    <dimen name="icon_lg">48dp</dimen>
+    <dimen name="icon_app">64dp</dimen>
+
+    <!-- Score ring -->
+    <dimen name="score_ring_small">80dp</dimen>
+    <dimen name="score_ring_large">160dp</dimen>
+    <dimen name="score_ring_stroke">12dp</dimen>
+
+    <!-- Bottom nav height -->
+    <dimen name="bottom_nav_height">64dp</dimen>
+
+    <!-- Elevation -->
+    <dimen name="elevation_card">2dp</dimen>
+    <dimen name="elevation_appbar">4dp</dimen>
+    <dimen name="elevation_fab">6dp</dimen>
+</resources>
