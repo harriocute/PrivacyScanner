@@ -2,15 +2,12 @@ package com.privacyscanner.data.model
 
 import android.graphics.drawable.Drawable
 
-/**
- * Core data model representing a scanned application with its privacy analysis results.
- */
 data class AppInfo(
     val packageName: String,
     val appName: String,
     val icon: Drawable?,
     val permissions: List<PermissionInfo>,
-    val privacyScore: Int,          // 0–100 (higher = more risky)
+    val privacyScore: Int,
     val riskLevel: RiskLevel,
     val isSystemApp: Boolean,
     val installDate: Long,
@@ -30,40 +27,31 @@ data class AppInfo(
         get() = spywareFlags.isNotEmpty()
 }
 
-/**
- * Represents a single Android permission with risk metadata.
- */
 data class PermissionInfo(
     val name: String,
     val simpleName: String,
     val description: String,
     val isDangerous: Boolean,
     val category: PermissionCategory,
-    val riskWeight: Int          // 1–10, used in score calculation
+    val riskWeight: Int
 )
 
-/**
- * Categories of permissions for grouping/display.
- */
-enum class PermissionCategory(val displayName: String, val iconRes: Int) {
-    LOCATION("Location", android.R.drawable.ic_menu_mylocation),
-    CAMERA("Camera", android.R.drawable.ic_menu_camera),
-    MICROPHONE("Microphone", android.R.drawable.ic_btn_speak_now),
-    CONTACTS("Contacts", android.R.drawable.ic_menu_myplaces),
-    MESSAGES("Messages & Calls", android.R.drawable.ic_menu_send),
-    STORAGE("Storage", android.R.drawable.ic_menu_save),
-    SENSORS("Sensors & Body", android.R.drawable.ic_menu_compass),
-    NETWORK("Network & Bluetooth", android.R.drawable.ic_menu_share),
-    PHONE("Phone", android.R.drawable.ic_menu_call),
-    CALENDAR("Calendar", android.R.drawable.ic_menu_today),
-    ACCOUNTS("Accounts & Identity", android.R.drawable.ic_menu_login),
-    OTHER("Other", android.R.drawable.ic_menu_info_details)
+enum class PermissionCategory(val displayName: String) {
+    LOCATION("Location"),
+    CAMERA("Camera"),
+    MICROPHONE("Microphone"),
+    CONTACTS("Contacts"),
+    MESSAGES("Messages & Calls"),
+    STORAGE("Storage"),
+    SENSORS("Sensors & Body"),
+    NETWORK("Network & Bluetooth"),
+    PHONE("Phone"),
+    CALENDAR("Calendar"),
+    ACCOUNTS("Accounts & Identity"),
+    OTHER("Other")
 }
 
-/**
- * Overall risk classification for an app.
- */
-enum class RiskLevel(val displayName: String, val colorRes: String) {
+enum class RiskLevel(val displayName: String, val colorHex: String) {
     SAFE("Safe", "#4CAF50"),
     LOW("Low Risk", "#8BC34A"),
     MODERATE("Moderate Risk", "#FF9800"),
@@ -71,9 +59,6 @@ enum class RiskLevel(val displayName: String, val colorRes: String) {
     CRITICAL("Critical Risk", "#B71C1C")
 }
 
-/**
- * Specific spyware-like behavior flags.
- */
 enum class SpywareFlag(val title: String, val description: String) {
     EXCESSIVE_PERMISSIONS(
         "Excessive Permissions",
@@ -85,7 +70,7 @@ enum class SpywareFlag(val title: String, val description: String) {
     ),
     BACKGROUND_LOCATION(
         "Background Location Access",
-        "This app can track your location even when you're not using it."
+        "This app can track your location even when you are not using it."
     ),
     CONTACTS_AND_MESSAGES(
         "Contacts + Messages Access",
@@ -101,7 +86,7 @@ enum class SpywareFlag(val title: String, val description: String) {
     ),
     SEND_SMS(
         "Can Send SMS",
-        "This app has permission to send text messages on your behalf, potentially incurring costs."
+        "This app has permission to send text messages on your behalf."
     ),
     BOOT_AUTOSTART(
         "Auto-starts on Boot",
@@ -109,7 +94,7 @@ enum class SpywareFlag(val title: String, val description: String) {
     ),
     BACKGROUND_SERVICES(
         "Persistent Background Services",
-        "This app runs services in the background that may monitor your device activity."
+        "This app runs services in the background that may monitor your device."
     ),
     ACCESSIBILITY_SERVICE(
         "Accessibility Service",
@@ -117,7 +102,7 @@ enum class SpywareFlag(val title: String, val description: String) {
     ),
     DEVICE_ADMIN(
         "Device Administrator",
-        "Device admin apps have elevated control over your device and can be difficult to uninstall."
+        "Device admin apps have elevated control and can be difficult to uninstall."
     ),
     ADVERTISING_TRACKERS(
         "Advertising Trackers Detected",
@@ -125,20 +110,17 @@ enum class SpywareFlag(val title: String, val description: String) {
     ),
     LOW_TARGET_SDK(
         "Outdated Security Standards",
-        "This app targets an old Android version, potentially bypassing modern security protections."
+        "This app targets an old Android version, bypassing modern security protections."
     )
 }
 
-/**
- * Scan summary results shown after a full device scan.
- */
 data class ScanResult(
     val totalApps: Int,
     val safeApps: Int,
     val moderateRiskApps: Int,
     val highRiskApps: Int,
     val criticalRiskApps: Int,
-    val devicePrivacyScore: Int,       // 0–100 (higher = more private/safe)
+    val devicePrivacyScore: Int,
     val scanDurationMs: Long,
     val scanTimestamp: Long,
     val flaggedApps: List<AppInfo>
