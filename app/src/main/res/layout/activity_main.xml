@@ -22,9 +22,7 @@
         android:layout_gravity="bottom"
         android:background="?attr/colorSurface"
         app:elevation="8dp"
-        app:itemRippleColor="@color/primary_alpha"
         app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemActiveIndicatorColor="@color/primary_alpha" />
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
