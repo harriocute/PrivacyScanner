@@ -9,12 +9,13 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.privacyscanner.R
 import com.privacyscanner.data.model.AppInfo
 import com.privacyscanner.data.model.RiskLevel
 import com.privacyscanner.data.model.SpywareFlag
@@ -53,7 +54,6 @@ class AppDetailFragment : Fragment() {
         setupToolbar()
         setupRecyclerView()
         setupClickListeners()
-
         viewModel.loadAppDetail(currentPackageName)
         observeViewModel()
     }
@@ -74,15 +74,9 @@ class AppDetailFragment : Fragment() {
     }
 
     private fun setupClickListeners() {
-        binding.btnOpenSettings.setOnClickListener {
-            openAppSettings(currentPackageName)
-        }
-        binding.btnUninstall.setOnClickListener {
-            showUninstallDialog()
-        }
-        binding.btnRevokePermissions.setOnClickListener {
-            openAppSettings(currentPackageName)
-        }
+        binding.btnOpenSettings.setOnClickListener { openAppSettings(currentPackageName) }
+        binding.btnUninstall.setOnClickListener { showUninstallDialog() }
+        binding.btnRevokePermissions.setOnClickListener { openAppSettings(currentPackageName) }
     }
 
     private fun observeViewModel() {
@@ -95,10 +89,7 @@ class AppDetailFragment : Fragment() {
 
     private fun populateUI(app: AppInfo) {
         binding.toolbar.title = app.appName
-
-        // Icon
         if (app.icon != null) binding.ivAppIcon.setImageDrawable(app.icon)
-
         binding.tvAppName.text = app.appName
         binding.tvPackageName.text = app.packageName
         binding.tvVersion.text = "v${app.versionName}"
@@ -106,7 +97,6 @@ class AppDetailFragment : Fragment() {
         val sdf = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
         binding.tvInstallDate.text = "Installed: ${sdf.format(Date(app.installDate))}"
 
-        // Risk score ring
         val riskColor = getRiskColor(app.riskLevel)
         binding.progressRiskScore.progress = app.privacyScore
         binding.progressRiskScore.setIndicatorColor(riskColor)
@@ -114,14 +104,11 @@ class AppDetailFragment : Fragment() {
         binding.tvRiskLabel.text = app.riskLevel.displayName
         binding.tvRiskLabel.setTextColor(riskColor)
 
-        // Permission counts
         binding.tvDangerousCount.text = app.dangerousPermissionCount.toString()
         binding.tvTotalPerms.text = app.totalPermissionCount.toString()
 
-        // System app notice
         binding.tvSystemAppNote.visibility = if (app.isSystemApp) View.VISIBLE else View.GONE
 
-        // Service status
         if (app.hasRunningServices) {
             binding.tvServiceStatus.text = "⚡ Background service running"
             binding.tvServiceStatus.setTextColor(Color.parseColor("#FF9800"))
@@ -130,7 +117,6 @@ class AppDetailFragment : Fragment() {
             binding.tvServiceStatus.setTextColor(Color.parseColor("#4CAF50"))
         }
 
-        // Flags
         if (app.spywareFlags.isNotEmpty()) {
             binding.cardFlags.visibility = View.VISIBLE
             populateFlags(app.spywareFlags)
@@ -138,10 +124,8 @@ class AppDetailFragment : Fragment() {
             binding.cardFlags.visibility = View.GONE
         }
 
-        // Hide uninstall for system apps
         binding.btnUninstall.visibility = if (app.isSystemApp) View.GONE else View.VISIBLE
 
-        // Permissions sorted by risk
         val sorted = app.permissions.sortedWith(
             compareByDescending<com.privacyscanner.data.model.PermissionInfo> { it.isDangerous }
                 .thenByDescending { it.riskWeight }
@@ -152,11 +136,9 @@ class AppDetailFragment : Fragment() {
     private fun populateFlags(flags: List<SpywareFlag>) {
         binding.llFlags.removeAllViews()
         flags.forEach { flag ->
-            val flagView = layoutInflater.inflate(
-                com.privacyscanner.R.layout.item_flag, binding.llFlags, false
-            )
-            flagView.findViewById<android.widget.TextView>(com.privacyscanner.R.id.tvFlagTitle).text = "⚠ ${flag.title}"
-            flagView.findViewById<android.widget.TextView>(com.privacyscanner.R.id.tvFlagDesc).text = flag.description
+            val flagView = layoutInflater.inflate(R.layout.item_flag, binding.llFlags, false)
+            flagView.findViewById<TextView>(R.id.tv_flag_title).text = "⚠ ${flag.title}"
+            flagView.findViewById<TextView>(R.id.tv_flag_desc).text = flag.description
             binding.llFlags.addView(flagView)
         }
     }
